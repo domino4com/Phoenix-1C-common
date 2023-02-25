@@ -1,0 +1,35 @@
+{
+    "name": "P1Common",
+    "version": "1.0.0",
+    "description": "P1Common",
+    "keywords": "IP1Common",
+    "authors": [{
+        "name": "Bjarke Gotfredsen",
+        "url": "https://github.com/gotfredsen",
+        "maintainer": true
+    }],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/domino4com/Phoenix-1C-common.git"
+    },
+    "homepage": "https://github.com/domino4com/Phoenix-1C-common",
+    "export": {
+        "include": [
+            "LICENSE",
+            "library.json",
+            "library.properties",
+            "README.md",
+            "keywords.txt",
+            "src/*",
+            "examples/*"
+        ]
+    },
+    "frameworks": ["arduino", "espidf"],
+    "platforms": "esp32",
+    "headers": "P1Common.h",
+    "examples": "examples/*/*.ino",
+    "dependencies":
+    {
+        "freenove/Freenove WS2812 Lib for ESP32": "^1.0.5"
+    }
+}
