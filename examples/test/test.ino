@@ -8,7 +8,8 @@ void setup() {
 
 void loop() {
   delay(100);
-  common.report(false, "Something is wrong");
+  common.setStatus(1, false);
   delay(100);
-  common.report(true, "All good");
+  common.setStatus(2, true);
+  common.sendStatus();
 }

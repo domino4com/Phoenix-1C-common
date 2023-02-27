@@ -20,7 +20,8 @@ struct  {
 } sReport;
 
 P1Common::P1Common(String s) {
-  strcpyn(CANpayloadID,s,4);
+  sprintf(CANpayloadID,"%4s",s);
+  // strcpyn(CANpayloadID,s,4);
 }
 
 void P1Common::begin() {
