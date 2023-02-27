@@ -8,8 +8,8 @@ void setup() {
 
 void loop() {
   delay(100);
-  common.setStatus(1, false);
+  common.setStatus(P1C_FLAG, false);
   delay(100);
-  common.setStatus(2, true);
+  common.setStatus(P1C_ALL_OK, true);
   common.sendStatus();
 }

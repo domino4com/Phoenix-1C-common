@@ -7,22 +7,7 @@
 Freenove_ESP32_WS2812 strip =
     Freenove_ESP32_WS2812(LEDS_COUNT, LEDS_PIN, LEDS_CHANNEL, TYPE_GRB);
 
-struct  {
-  char pid[4];
-  bool AllOK : 1;
-  bool SDerr1 : 1;
-  bool SDerr2 : 1;
-  bool Flag : 1;
-  bool Sensor1 : 1;
-  bool Sensor2 : 1;
-  bool Sensor3 : 1;
-  bool Sensor4 : 1;
-} sReport;
-
-P1Common::P1Common(String s) {
-  sprintf(CANpayloadID,"%4s",s);
-  // strcpyn(CANpayloadID,s,4);
-}
+P1Common::P1Common(String s) { sprintf(CANpayloadID, "%4s", s); }
 
 void P1Common::begin() {
   strip.begin();
@@ -35,16 +20,22 @@ void P1Common::begin() {
     CANok = false;
 }
 
-void P1Common::setStatus(int bitno,bool ok) {
-  Serial.printf( "Memory size occupied by status1 : %d\n", sizeof(sReport));
-  if (ok) {
+void P1Common::setStatus(int bitno, bool ok) { bitWrite(CANstatus, bitno, ok); }
+
+void P1Common::sendStatus() {
+  if (bitRead(CANstatus, 7)) {
     setColor('G');
   } else {
     setColor('R');
   }
-}
-
-void P1Common::sendStatus() {
+  for (int i = 0; i < 10; i++) {
+    CAN.beginPacket(0x21);
+    CAN.write(CANpayloadID, 4);
+    CAN.write(CANstatus);
+    if (CAN.endPacket()) break;  // Packet sent, lets move
+    delay(random(20));  // Packet not sent, wait a little random bit of time not
+                        // to collide with other messages and try again.
+  }
 }
 
 void P1Common::setColor(char color) {
