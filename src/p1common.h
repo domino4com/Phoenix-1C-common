@@ -24,7 +24,7 @@ class P1Common {
  private:
   void setColor(char);
   bool CANok;
-  const uint8_t CANpayloadID[4];
+  uint8_t CANpayloadID[4];
   byte CANstatus;
 };
 

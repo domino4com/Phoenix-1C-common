@@ -7,14 +7,14 @@
 Freenove_ESP32_WS2812 strip =
     Freenove_ESP32_WS2812(LEDS_COUNT, LEDS_PIN, LEDS_CHANNEL, TYPE_GRB);
 
-P1Common::P1Common(String s) { s.toCharArray(CANpayloadID, 4); }
+P1Common::P1Common(String s) { s.toCharArray((char*)CANpayloadID, 5); }
 
 void P1Common::begin() {
   strip.begin();
   strip.setBrightness(5);
 
   CAN.setPins(2, 4);
-  if (CAN.begin(250E3))
+  if (CAN.begin(100E3))
     CANok = true;
   else
     CANok = false;
@@ -33,6 +33,7 @@ void P1Common::sendStatus() {
     CAN.write(CANpayloadID, 4);
     CAN.write(CANstatus);
     if (CAN.endPacket()) break;  // Packet sent, lets move
+    setColor('B');
     delay(random(20));  // Packet not sent, wait a little random bit of time not
                         // to collide with other messages and try again.
   }
