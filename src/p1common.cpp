@@ -7,7 +7,7 @@
 Freenove_ESP32_WS2812 strip =
     Freenove_ESP32_WS2812(LEDS_COUNT, LEDS_PIN, LEDS_CHANNEL, TYPE_GRB);
 
-P1Common::P1Common(String s) { sprintf(CANpayloadID, "%4s", s); }
+P1Common::P1Common(String s) { s.toCharArray(CANpayloadID, 4); }
 
 void P1Common::begin() {
   strip.begin();
