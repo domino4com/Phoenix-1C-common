@@ -1,6 +1,6 @@
 #include "p1common.h"
 
-P1Common common;
+P1Common common("TEST");
 
 void setup() {
   common.begin();
