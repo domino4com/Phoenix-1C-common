@@ -31,6 +31,7 @@
     "dependencies":
     {
         "freenove/Freenove WS2812 Lib for ESP32": "^1.0.5",
-        "sandeepmistry/CAN": "^0.3.1"
+        "sandeepmistry/CAN": "^0.3.1",
+        "fbiego/ESP32Time": "^2.0.0"
     }
 }
